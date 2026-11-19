@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red{color:red;}
+    </style>
+</head>
+<body>
+    <p id="msg">こんにちは</p>
+    <button onclick="ChangeMessage()">押してね☆</button>
+    <script>
+        function ChangeMessage(){
+            const m=document.getElementById("msg");
+            m.textContent="押しましたあ";
+            m.classList.add("red");
+        }
+    </script>
+</body>
+</html>

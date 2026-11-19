@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=], initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .red { color: red; }
+    </style>
+</head>
+<body>
+    <p id ="msg">こんにちは</p>
+    <button onclick="myFunc();">ボタン</button>
+    <button onclick="myFunction();">reボタン</button>
+
+    <script>
+      function myFunc() {
+        const msg = document.getElementById("msg");
+        msg.textContent = "押しました";
+        msg.classList.add("red");
+      }
+
+      function myFunction() {
+        const m = document.getElementById("msg");
+        m.textContent = "こんにちは";
+        m.classList.remove("red");
+      }
+    </script>
+</body>
+</html>
