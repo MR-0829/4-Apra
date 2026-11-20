@@ -10,6 +10,10 @@ let enemies = [];
 enemies.push(createEnemy(200, 80));
 enemies.push(createEnemy(380, -120));
 enemies.push(createEnemy(540, 60));
+const special = createEnemy(300, 80);   // 作る（ほかの敵と同じ）
+special.type = "hard";                // この敵だけが持つ値を足す
+special.hp = 2;
+enemies.push(special);                  // 入れる
 
 // ③ 動かす：配列の敵を1体ずつ取り出して、同じ処理をする
 function updateEnemies(dt) {
@@ -31,7 +35,14 @@ function updateEnemies(dt) {
 function collideWithEnemies(prevBottom) {
   for (const enemy of enemies) {
     if (aabb(player, enemy) && prevBottom <= enemy.y && player.vy > 0) {
+      if (enemy.type === "hard"){
+        enemy.hp -= 1;
+        if(enemy.hp <= 0){
+          enemy.alive = false;
+        }
+      }else{
       enemy.alive = false;            // 倒した（状態を書き換える）
+      }
       player.vy = -JUMP_SPEED / 2;    // 踏んだら、少し跳ねる
     }
   }
@@ -42,6 +53,11 @@ function collideWithEnemies(prevBottom) {
 function drawEnemies() {
   ctx.fillStyle = "#ff6b6b";
   for (const enemy of enemies) {
+    if (enemy.type === "hard" && enemy.hp === 1) {
+      ctx.fillStyle = "#fffb00";  // 1回踏まれた後の色
+    } else {
+      ctx.fillStyle = "#ff6b6b";  // 通常の色
+    }
     ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h);
   }
   ctx.fillStyle = "#e8eeff";
